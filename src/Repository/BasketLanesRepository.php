@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\BasketLanes;
+use App\Exception\BasketLane\BasketLaneNotFound;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,17 @@ class BasketLanesRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, BasketLanes::class);
+    }
+
+    public function getById(int $id): BasketLanes
+    {
+        $basketLane = $this->find($id);
+
+        if(!$basketLane) {
+            throw BasketLaneNotFound::forId($id);
+        }
+
+        return $basketLane;
     }
 
     // /**

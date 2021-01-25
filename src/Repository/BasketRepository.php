@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Basket;
+use App\Exception\Basket\BasketNotFound;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -28,6 +29,17 @@ class BasketRepository extends ServiceEntityRepository
             ->setParameter('userId', $userId)
             ->getQuery()
             ->getResult();
+    }
+
+    public function getById(int $id): Basket
+    {
+        $basket = $this->find($id);
+
+        if(!$basket) {
+            throw BasketNotFound::forId($id);
+        }
+
+        return $basket;
     }
 
     // /**

@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\SellGameType;
 
 class SellGameController extends AbstractController
 {
@@ -13,8 +14,9 @@ class SellGameController extends AbstractController
      */
     public function index(): Response
     {
+        $form = $this->createForm(SellGameType::class);
         return $this->render('sell_game/index.html.twig', [
-            'controller_name' => 'SellGameController',
+            'form' => $form->createView(),
         ]);
     }
 }

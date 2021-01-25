@@ -59,20 +59,16 @@ class ProductController extends AbstractController
         $parameters = [];
         try {
             $user = $this->getUser();
-
             if (!$user instanceof User) {
                 throw new EntityNotFoundException("Nie jesteś zalogowany");
             }
             $productId = $request->get('productId');
             $quantity = $request->get('quantity');
-
             $product = $this->productRepository->getById($productId);
-
+            $basket = $this->basketRepository->findNewBasketForUser($user->getId());
             if (!$product instanceof Product) {
                 throw new EntityNotFoundException("Nie znaleziono produktu");
             }
-
-            $basket = $this->basketRepository->findNewBasketForUser($user->getId());
             if (!$basket[0] instanceof Basket) {
                 throw new EntityNotFoundException("Nie znaleziono aktywnego koszyka dla użytkownika");
             }

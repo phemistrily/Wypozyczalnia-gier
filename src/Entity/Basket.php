@@ -102,4 +102,14 @@ class Basket
 
         return $this;
     }
+
+    public function getBasketValue()
+    {
+        $value = 0;
+        $basketLanes = $this->getBasketLanes();
+        foreach ($basketLanes as $basketLane) {
+            $value += $basketLane->getQuantity()*$basketLane->getPrice();
+        }
+        return $value;
+    }
 }

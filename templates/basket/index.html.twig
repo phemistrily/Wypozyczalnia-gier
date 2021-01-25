@@ -3,18 +3,68 @@
 {% block title %}Hello BasketController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<h2 class="m-3">Koszyki</h2>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for basket in baskets  %}
+        <div class="row card-body">
+        <div class="col-3">
+            <b>Identyfikator koszyka</b>
+        </div>
+        <div class="col-3">
+            <b>Status</b>
+        </div>
+        <div class="col-3">
+            <b>Wartość koszyka</b>
+        </div>
+        <div class="col-3">
+            <b>Zarządzaj</b>
+        </div>
+            <div class="col-3">
+                {{ basket.getId() }}
+            </div>
+            <div class="col-3">
+                {{ basket.getStatus() }}
+            </div>
+            <div class="col-3">
+                {{ basket.getBasketValue() }}
+            </div>
+            <div class="col-3">
+                <a href="{{ path('pay', {id: basket.getId() }) }}" style="color:blue;">Zapłać</a>
+            </div>
+        <div class="col-12">
+            <div class="row my-3">
+                <div class="col-3">
+                    <b>Nazwa produktu</b>
+                </div>
+                <div class="col-3">
+                    <b>Ilość</b>
+                </div>
+                <div class="col-3">
+                    <b>Cena za sztukę</b>
+                </div>
+                <div class="col-3">
+                    <b>Zarządzaj</b>
+                </div>
+            </div>
+            {% for basketLane in basket.getBasketLanes() %}
+                <div class="row my-3">
+                    <div class="col-3">
+                        {{ basketLane.getProduct.getName() }}
+                    </div>
+                    <div class="col-3">
+                        {{ basketLane.getQuantity() }}
+                    </div>
+                    <div class="col-3">
+                        {{ basketLane.getPrice() }}
+                    </div>
+                    <div class="col-3">
+                        <a href="{{ path('deleteBasketLane', {id: basketLane.getId() }) }}" style="color:blue;">Usuń Pozycje</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+        <hr /><br/><br/>
+    {% endfor %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'E:/xampp/htdocs/wypozyczalnia_gier/Wypozyczalnia-gier/src/Controller/BasketController.php'|file_link(0) }}">src/Controller/BasketController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'E:/xampp/htdocs/wypozyczalnia_gier/Wypozyczalnia-gier/templates/basket/index.html.twig'|file_link(0) }}">templates/basket/index.html.twig</a></code></li>
-    </ul>
-</div>
 {% endblock %}
