@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {% if products is defined and products is iterable %}
+        {% for product in products %}
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-content product-box">
+                        <div class="product-imitation">
+                            [ Zdjęcie ]
+                        </div>
+                        <div class="product-desc">
+                            <span class="product-price">
+                                {{ product.getPrice() }} zł
+                            </span>
+                            <small class="text-muted">{{ product.getPlatform() }}</small>
+                            <a href="#" class="product-name"> {{ product.getName() }}</a>
+                            <br />
+                            <div class="small m-t-xs">
+                            </div>
+                            <div class="m-t text-righ">
+
+                                <a href="{{ path('product', {id: product.getId() }) }}" class="btn btn-xs btn-primary">Przejdź do produktu</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

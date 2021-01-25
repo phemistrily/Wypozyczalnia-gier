@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Widok produktu{% endblock %}
+
+{% block body %}
+<section class="mb-5">
+  <form action="{{ path('add_to_basket') }}" method="post">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h5>{{ product.getName() }}</h5>
+      <p class="mb-2 text-muted text-uppercase small">{{ product.getProductCategory().getName() }}</p>
+      <p><span class="mr-1"><strong>{{ product.getPrice() }} zł</strong></span></p>
+      <p class="pt-1">{{ product.getDescription() }}</p>
+      <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0">
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+      <div class="table-responsive mb-2">
+        <table class="table table-sm table-borderless">
+          <tbody>
+            <tr>
+              <td class="pl-0 pb-0 w-25">Ilość</td>
+            </tr>
+            <tr>
+              <td class="pl-0">
+                <div class="def-number-input number-input safari_only mb-0">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                    class="btn btn-secondary">-</button>
+                  <input class="quantity" min="0" name="quantity" value="1" type="number">
+                  <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                    class="btn btn-secondary">+</button>
+                </div>
+              </td>
+              <td>
+                <div class="mt-1">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <input type="hidden" name="productId" value="{{ product.getId() }}">
+      <button type="submit" class="btn btn-primary btn-md mr-1 mb-2">
+          <i class="pr-2"></i>Dodaj do koszyka
+        </button>
+    </div>
+  </div>
+  </form>
+</section>
+{% endblock %}

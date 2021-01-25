@@ -1,0 +1,6 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    paths:
+        '%kernel.project_dir%/public/images': images
+    globals:
+        productCategories: '@App\Services\ProductCategoryService'

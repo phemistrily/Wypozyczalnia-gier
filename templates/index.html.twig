@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="col-md-12">
+    <h1> Strona główna </h1>
+    {% if is_granted('ROLE_USER') %}
+        <p>Chcesz kupić grę, ale nie jesteś pewien czy ci się ona spodoba. A może po prostu potrzebujesz szybko jakiejś gry na spotkanie ze znajomymi?
+W obu przypadkach zapraszamy do naszej wypożyczalni</p>
+        <h3>Sklep</h3>
+
+        <h3>Wypożyczalnia</h3>
+
+        <h3>Sprzedaj grę</h3>
+        <p>W naszym sklepie możesz również zostawić grę. Jeżeli jesteś zainteresowany opcją przejdź do zakładki przejdź do zakładki "Sprzedaj grę"</p>
+    {% else %}
+        Jeżeli chcesz mieć dostęp do serwisu <a href="{{ path('register') }}" class="success">Zarejestruj się</a>
+    {% endif %}
+</div>
+{% if is_granted('ROLE_USER') %}
+
+{% endif %}
+{% endblock %}

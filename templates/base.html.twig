@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta charset="UTF-8">
+        <title>{% block title %}Witaj na stronie wypożyczalni gier!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('build/global.css') }}" />
+        {% endblock %}
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+
+    </head>
+    <body>
+        <div class="wrapper">
+            <nav id="sidebar">
+                <ul class="list-unstyled components">
+                    <p>Kategorie gier</p>
+                    {% if productCategories.getCategories is iterable %}
+                        {% for category in productCategories.getCategories %}
+                            <li><a href="{{ path('category', {id: category.id }) }}">{{ category.name }}</a></li>
+                        {% endfor %}
+                    {% else %}
+                        <li style="color: red;">{{ productCategories.getCategories }}</li>
+                    {% endif %}
+                    
+                </ul>
+            </nav>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo">
+                    </div>
+                    <div class="col-md-8">
+                    <br />
+                        <h1>Wypożyczalnia gier Matrix II</h1>
+                        {% if is_granted('ROLE_USER') %}
+                            <span>Zalogowany jako {{ app.user.email }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-12">
+                        <div class="topnav" id="myTopnav">
+                            <a href="/">Strona główna</a>
+                            {% if is_granted('ROLE_USER') %}
+                            
+                                <a href="{{ path('lend_game') }}" class="">Wypożycz grę</a>
+                                <a href="{{ path('sell_game') }}" class="">Sprzedaj grę</a>
+                                <a href="{{ path('basket') }}" class="">Koszyk</a>
+                                <a href="{{ path('user') }}" class="">Profil</a>
+                                <a href="{{ path('logout') }}" class="danger ">Wyloguj</a>
+                            {% else %}
+                                <a href="{{ path('login') }}" class="success">Zaloguj się</a>
+                                <a href="{{ path('register') }}" class="success">Zarejestruj się</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row p-4">
+                            {% if typeMessage is defined and typeMessage == 'fail' %}
+                                <div class="col-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ message }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if typeMessage is defined and typeMessage == 'success' %}
+                                <div class="col-12">
+                                    <div class="alert alert-success" role="alert">
+                                        {{ message }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% block body %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block javascripts %}
+        <script src="{{ asset('build/app.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
