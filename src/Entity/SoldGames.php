@@ -73,4 +73,9 @@ class SoldGames
 
         return $this;
     }
+
+    public function __toString():string
+    {
+        return $this->id. ' '. $this->product->getName();
+    }
 }
