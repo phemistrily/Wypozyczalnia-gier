@@ -29,6 +29,7 @@ class BasketController extends AbstractController
     public function index(Request $request): Response
     {
         $parameters = [];
+        //$parameters['baskets'] = [];
         try {
             $user = $this->getUser();
             if (!$user instanceof User) {
@@ -76,11 +77,6 @@ class BasketController extends AbstractController
         $parameters = [];
         try {
             $basket = $this->basketRepository->getById($request->get('id'));
-
-            if (!$basket instanceof Basket)
-            {
-                throw new EntityNotFoundException('Nie znaleziono koszyka');
-            }
 
             if ($basket->getStatus() !== 'NEW') {
                 throw new \Exception('Nie możesz zapłacić za ten koszyk');

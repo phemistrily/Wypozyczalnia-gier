@@ -42,9 +42,6 @@ class CategoryController extends AbstractController
             $parameters['typeMessage'] = 'fail';
         }
 
-
-
-
         return $this->render('category/index.html.twig', $parameters);
     }
 }

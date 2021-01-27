@@ -3,6 +3,7 @@
 {% block title %}Hello BasketController!{% endblock %}
 
 {% block body %}
+    <div class="col-12">
 <h2 class="m-3">Koszyki</h2>
 
     {% for basket in baskets  %}
@@ -66,5 +67,5 @@
         </div>
         <hr /><br/><br/>
     {% endfor %}
-
+    </div>
 {% endblock %}

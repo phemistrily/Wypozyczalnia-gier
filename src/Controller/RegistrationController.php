@@ -44,9 +44,6 @@ class RegistrationController extends AbstractController
             } catch (\Exception $e) {
                 return $this->redirectToRoute('register', ['message' => $e->getMessage(), 'typeMessage' => 'fail']);
             }
-            
-
-            
         }
 
         return $this->render('registration/register.html.twig', [
