@@ -3,8 +3,16 @@
 {% block title %}Sprzedaj grę{% endblock %}
 
 {% block body %}
+    <div class="col-12">
+    <h2>Sprzedaj grę</h2>
+    <br/>
+    <p>Sprawdź, czy gra, którą posiadasz znajduje się na naszej liście. <br />
+        Jeżeli tak zaproponuj ją nam wraz z ceną jaką oczekujesz, a my skontaktujemy się z Tobą. <br />
+        Pamiętaj, aby ceny podawać rozsądne, radzimy sugerować się cenami, które są dostępne w sklepie <br />
+        Jeżeli nie widzisz gry na liście skontaktuj się z nami!</p>
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <button type="submit" class="btn btn-primary">Zaproponuj</button>
     {{ form_end(form) }}
+    </div>
 {% endblock %}

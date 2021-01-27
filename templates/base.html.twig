@@ -17,7 +17,7 @@
         <div class="wrapper">
             <nav id="sidebar">
                 <ul class="list-unstyled components">
-                    <p>Kategorie gier</p>
+                    <p><h4>&nbsp;&nbsp;Kategorie gier</h4></p>
                     {% if productCategories.getCategories is iterable %}
                         {% for category in productCategories.getCategories %}
                             <li><a href="{{ path('category', {id: category.id }) }}">{{ category.name }}</a></li>

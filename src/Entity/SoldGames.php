@@ -18,7 +18,7 @@ class SoldGames
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Product::class, cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Product::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
@@ -32,6 +32,20 @@ class SoldGames
      * @ORM\Column(type="string", length=255)
      */
     private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="soldGames")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    public function __construct(User $user, Product $product, float $price, string $status = "NEW")
+    {
+        $this->user = $user;
+        $this->product = $product;
+        $this->price = $price;
+        $this->status = $status;
+    }
 
     public function getId(): ?int
     {
@@ -77,5 +91,17 @@ class SoldGames
     public function __toString():string
     {
         return $this->id. ' '. $this->product->getName();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

@@ -39,10 +39,10 @@
                 {% for loan in loans  %}
                   <div class="row">
                     <div class="col-sm-4">
-                      {{ loan.getDateLoan() }}
+                      {{ loan.getDateLoan()|date("d/m/Y") }}
                     </div>
                     <div class="col-sm-4">
-                      {{ loan.getDateExpectedFinishLoan() }}
+                      {{ loan.getDateExpectedFinishLoan()|date("d/m/Y") }}
                     </div>
                     <div class="col-sm-4">
                       {{ loan.getProduct().getName() }}
@@ -66,22 +66,48 @@
                       Zobacz więcej
                     </div>
                     {% for basket in baskets  %}
-                      <div class="row">
                         <div class="col-sm-4">
                           {{ basket.getId() }}
                         </div>
                         <div class="col-sm-4">
-                          //status
+                          {{ basket.getStatus() }}
                         </div>
                         <div class="col-sm-4">
-                          //ahref
+                          <a href="{{ path('basket') }}" style="color: blue;">Zobacz więcej</a>
                         </div>
-                      </div>
                     {% endfor %}
                   </div>
                   </div>
                   <hr>
                 </div>
+              <div class="card mb-3">
+                <h2 class="m-3">Twoje oferty sprzedaży</h2>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      Gra
+                    </div>
+                    <div class="col-sm-4">
+                      Status
+                    </div>
+                    <div class="col-sm-4">
+                      Cena
+                    </div>
+                    {% for soldGame in soldGames  %}
+                        <div class="col-sm-4">
+                          {{ soldGame.getProduct() }}
+                        </div>
+                        <div class="col-sm-4">
+                          {{ soldGame.getStatus() }}
+                        </div>
+                        <div class="col-sm-4">
+                          {{ soldGame.getPrice() }}
+                        </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <hr>
+              </div>
               </div>
               </div>
             </div>

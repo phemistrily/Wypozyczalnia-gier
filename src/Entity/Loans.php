@@ -39,6 +39,14 @@ class Loans
      */
     private $user;
 
+    public function __construct(User $user, Product $product, $dateLoan, $dateExpectedFinishLoan)
+    {
+        $this->user = $user;
+        $this->product = $product;
+        $this->dateLoan = $dateLoan;
+        $this->dateExpectedFinishLoan = $dateExpectedFinishLoan;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

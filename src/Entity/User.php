@@ -58,10 +58,16 @@ class User implements UserInterface
      */
     private $loans;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SoldGames::class, mappedBy="user")
+     */
+    private $soldGames;
+
     public function __construct()
     {
         $this->baskets = new ArrayCollection();
         $this->loans = new ArrayCollection();
+        $this->soldGames = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,5 +235,35 @@ class User implements UserInterface
     public function __toString():string
     {
         return $this->email;
+    }
+
+    /**
+     * @return Collection|SoldGames[]
+     */
+    public function getSoldGames(): Collection
+    {
+        return $this->soldGames;
+    }
+
+    public function addSoldGame(SoldGames $soldGame): self
+    {
+        if (!$this->soldGames->contains($soldGame)) {
+            $this->soldGames[] = $soldGame;
+            $soldGame->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoldGame(SoldGames $soldGame): self
+    {
+        if ($this->soldGames->removeElement($soldGame)) {
+            // set the owning side to null (unless already changed)
+            if ($soldGame->getUser() === $this) {
+                $soldGame->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

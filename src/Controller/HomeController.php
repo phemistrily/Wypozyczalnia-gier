@@ -26,6 +26,7 @@ class HomeController extends AbstractController
         return $this->render('user.html.twig', [
             'baskets' => $user->getBaskets(),
             'loans' => $user->getLoans(),
+            'soldGames' => $user->getSoldGames(),
         ]);
     }
 }
